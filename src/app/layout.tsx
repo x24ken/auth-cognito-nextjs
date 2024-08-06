@@ -5,6 +5,8 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Inter } from "next/font/google";
 import Navigation from "./components/Navigation";
+import { getUserDisplayName } from "@/utils/auth";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +37,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [displayName, setDisplayName] = useState("User");
+
+  useEffect(() => {
+    async function fetchDisplayName() {
+      const name = await getUserDisplayName();
+      setDisplayName(name);
+    }
+    fetchDisplayName();
+  }, []);
+
   return (
     <html lang="ja">
       <body className={inter.className}>
@@ -42,7 +54,7 @@ export default function RootLayout({
           {({ signOut, user }) => (
             <main>
               <Navigation />
-              <h1>Hello {user?.username}</h1>
+              <h1>Hello {displayName}</h1>
               <button onClick={signOut}>Sign out</button>
               {children}
             </main>
