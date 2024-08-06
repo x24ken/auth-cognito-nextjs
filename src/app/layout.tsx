@@ -20,7 +20,12 @@ Amplify.configure({
       loginWith: {
         oauth: {
           domain: process.env.NEXT_PUBLIC_COGNITO_DOMAIN as string,
-          scopes: ["email", "profile", "openid"],
+          scopes: [
+            "email",
+            "profile",
+            "openid",
+            "aws.cognito.signin.user.admin",
+          ],
           redirectSignIn: [process.env.NEXT_PUBLIC_REDIRECT_SIGN_IN as string],
           redirectSignOut: [
             process.env.NEXT_PUBLIC_REDIRECT_SIGN_OUT as string,
@@ -51,11 +56,10 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         <Authenticator socialProviders={["google"]}>
-          {({ signOut, user }) => (
+          {({}) => (
             <main>
               <Navigation />
               <h1>Hello {displayName}</h1>
-              <button onClick={signOut}>Sign out</button>
               {children}
             </main>
           )}
