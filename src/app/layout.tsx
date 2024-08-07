@@ -55,15 +55,13 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <Authenticator socialProviders={["google"]}>
-          {({}) => (
-            <main>
-              <Navigation />
-              <h1>Hello {displayName}</h1>
-              {children}
-            </main>
-          )}
-        </Authenticator>
+        <Authenticator.Provider>
+          <main>
+            <Navigation />
+            <h1>Hello {displayName}</h1>
+            {children}
+          </main>
+        </Authenticator.Provider>
       </body>
     </html>
   );
