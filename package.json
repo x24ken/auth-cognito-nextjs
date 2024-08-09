@@ -1,5 +1,5 @@
 {
-  "name": "test-cognito-pool",
+  "name": "auth-cognito-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
