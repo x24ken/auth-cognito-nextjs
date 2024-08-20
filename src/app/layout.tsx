@@ -14,22 +14,14 @@ const inter = Inter({ subsets: ["latin"] });
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID as string,
-      userPoolClientId: process.env
-        .NEXT_PUBLIC_USER_POOL_WEB_CLIENT_ID as string,
+      userPoolId: process.env.USER_POOL_ID as string,
+      userPoolClientId: process.env.USER_POOL_WEB_CLIENT_ID as string,
       loginWith: {
         oauth: {
-          domain: process.env.NEXT_PUBLIC_COGNITO_DOMAIN as string,
-          scopes: [
-            "email",
-            "profile",
-            "openid",
-            "aws.cognito.signin.user.admin",
-          ],
-          redirectSignIn: [process.env.NEXT_PUBLIC_REDIRECT_SIGN_IN as string],
-          redirectSignOut: [
-            process.env.NEXT_PUBLIC_REDIRECT_SIGN_OUT as string,
-          ],
+          domain: process.env.COGNITO_DOMAIN as string,
+          scopes: ["email", "profile", "openid"],
+          redirectSignIn: [process.env.REDIRECT_SIGN_IN as string],
+          redirectSignOut: [process.env.REDIRECT_SIGN_OUT as string],
           responseType: "code",
         },
       },
